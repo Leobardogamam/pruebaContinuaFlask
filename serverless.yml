@@ -27,5 +27,3 @@ functions:
 plugins:
   - serverless-wsgi
   - serverless-python-requirements
-
-
