@@ -2,16 +2,20 @@ from flask import Flask, jsonify, make_response
 
 app = Flask(__name__)
 
+allUser = [{"id":0,"nombre":"Leobardo"}, {"id":1,"nombre":"Ricardo"}]
 
-@app.route("/")
-def hello_from_root():
-    return jsonify(message='Hola desde el path inicial !')
+@app.route('/app/<id>', methods=["GET"])
+def users_actions(id):
+    return jsonify(allUser[int(id)])
 
-
-@app.route("/hello", methods=['GET','POST'])
-def hello():
-    return jsonify(message='Hello from path!')
-
+@app.route('/app/v1/users', methods=["POST","GET"])
+def users_actions2():
+    if(request.method == "GET"):
+        return jsonify(allUser)
+    else:
+        user = {"id": request.form["id"], "nombre": request.form["nombre"]}
+        allUser.append(user)
+        return jsonify(user)
 
 @app.errorhandler(404)
 def resource_not_found(e):
