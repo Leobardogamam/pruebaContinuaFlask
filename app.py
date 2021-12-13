@@ -4,6 +4,10 @@ app = Flask(__name__)
 
 allUser = [{"id":0,"nombre":"Leobardo"}, {"id":1,"nombre":"Ricardo"}]
 
+@app.route('/')
+def inicio():
+    return "Hola amigo :)"
+
 @app.route('/app/<id>', methods=["GET"])
 def users_actions(id):
     return jsonify(allUser[int(id)])
