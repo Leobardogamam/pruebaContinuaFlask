@@ -5,10 +5,10 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_from_root():
-    return jsonify(message='Hello from root!')
+    return jsonify(message='Hola desde el directorio principal')
 
 
-@app.route("/hello/<nombre>", methods=['GET','POST'])
+@app.route("/hola/<nombre>", methods=['GET','POST'])
 def hello(nombre):
     return jsonify(message=f'Hello from path! {nombre}')
 
