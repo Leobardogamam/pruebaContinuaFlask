@@ -1,25 +1,17 @@
-from flask import Flask, jsonify, make_response, request
+from flask import Flask, jsonify, make_response
 
 app = Flask(__name__)
 
-allUser = [{"id":0,"nombre":"Leobardo"}, {"id":1,"nombre":"Ricardo"}]
 
-@app.route('/')
-def inicio():
-    return "Hola amigo :)"
+@app.route("/")
+def hello_from_root():
+    return jsonify(message='Hello from root!')
 
-@app.route('/app/<id>', methods=["GET"])
-def users_actions(id):
-    return jsonify(allUser[int(id)])
 
-@app.route('/app/v1/users', methods=["POST","GET"])
-def users_actions2():
-    if(request.method == "GET"):
-        return jsonify(allUser)
-    else:
-        user = {"id": request.form["id"], "nombre": request.form["nombre"]}
-        allUser.append(user)
-        return jsonify(user)
+@app.route("/hello/<nombre>", methods=['GET','POST'])
+def hello(nombre):
+    return jsonify(message=f'Hello from path! {nombre}')
+
 
 @app.errorhandler(404)
 def resource_not_found(e):
